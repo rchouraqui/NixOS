@@ -10,6 +10,13 @@ let
 in
 {
   config = lib.mkIf cfg {
+    age.secrets."cloudflare-token" = {
+      file = ../secrets/cloudflare-token.age;
+      owner = "root";
+      group = "acme";
+      mode = "0440";
+    };
+
     services.nginx = {
       recommendedGzipSettings = true;
       recommendedOptimisation = true;
@@ -34,8 +41,17 @@ in
 
     security.acme = {
       acceptTerms = true;
-      defaults.email = "no-reply@dprive.fr";
+      defaults = {
+        email = "no-reply@dprive.fr";
+        dnsProvider = "cloudflare";
+        credentialFiles = {
+          "CLOUDFLARE_DNS_API_TOKEN_FILE" = config.age.secrets."cloudflare-token".path;
+        };
+        webroot = null;
+      };
     };
+
+    users.users.nginx.extraGroups = [ "acme" ];
 
     security.apparmor.policies.nginx = {
       state = "enforce";
