@@ -23,6 +23,14 @@ let
     lib
     ;
   };
+  flashcards = import ./flashcards.nix {
+    inherit
+    inputs
+    config
+    pkgs
+    lib
+    ;
+  };
   cfg = config.selfhost;
 
 in
@@ -30,6 +38,7 @@ in
   imports = [
     htop
     nginx
+    flashcards
   ];
 
   options.selfhost = {
@@ -42,6 +51,11 @@ in
       type = lib.types.bool;
       default = false;
       description = "Enable the nginx";
+    };
+    flashcards = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Enable the flashcards";
     };
   };
 }
