@@ -6,6 +6,11 @@
 }:
 
 let
+  domainServices = [
+    "htop"
+    "flashcards"
+  ];
+
   cfg = config.selfhost.nginx;
 in
 {
@@ -41,14 +46,15 @@ in
 
     security.acme = {
       acceptTerms = true;
-      defaults = {
-        email = "no-reply@dprive.fr";
-        dnsProvider = "cloudflare";
-        credentialFiles = {
-          "CLOUDFLARE_DNS_API_TOKEN_FILE" = config.age.secrets."cloudflare-token".path;
+      email = "no-reply@dprive.fr";
+      certs = builtins.listToAttrs (map (domain: {
+        name = "${domain}.dprive.fr";
+        value ={
+          dnsProvider = "cloudflare";
+          credentialFiles."CLOUDFLARE_DNS_API_TOKEN_FILE" = config.age.secrets."cloudflare-token".path;
+          webroot = null;
         };
-        webroot = null;
-      };
+      }) domainServices);
     };
 
     users.users.nginx.extraGroups = [ "acme" ];
