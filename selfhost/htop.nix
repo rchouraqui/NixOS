@@ -20,7 +20,7 @@ in
       nginx = {
         enable = true;
         virtualHosts."htop.dprive.fr" = {
-          enableACME = true;
+          useACMEHost = "htop.dprive.fr";
           forceSSL = true;
           locations."/" = {
             proxyPass = "http://127.0.0.1:61208";
