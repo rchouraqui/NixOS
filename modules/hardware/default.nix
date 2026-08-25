@@ -32,6 +32,7 @@ in
     network
     bluetooth
     printer
+    inputs.agenix.nixosModules.default
   ];
 
   options.config-hw = {
@@ -102,6 +103,11 @@ in
       zsh
       vulkan-tools
       openssl
+      age
+    ]
+    ++ [
+      inputs.agenix.packages.${pkgs.system}.agenix
     ];
+  age.identityPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
   };
 }
