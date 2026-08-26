@@ -9,6 +9,9 @@ let
   domainServices = [
     "htop"
     "flashcards"
+    "jellyfin"
+    "radarr"
+    "sonarr"
   ];
 
   cfg = config.selfhost.nginx;
