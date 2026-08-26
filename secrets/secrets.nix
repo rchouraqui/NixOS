@@ -11,4 +11,5 @@ let
 in
 {
   "cloudflare-token.age".publicKeys = systems;
+  "mullvad-wireguard-secret.age".publicKeys = systems;
 }
