@@ -23,7 +23,7 @@ let
     lib
     ;
   };
-  flashcards = import ./flashcards.nix {
+  jellyfin = import ./jellyfin.nix {
     inherit
     inputs
     config
@@ -38,7 +38,7 @@ in
   imports = [
     htop
     nginx
-    flashcards
+    jellyfin
   ];
 
   options.selfhost = {
@@ -52,10 +52,10 @@ in
       default = false;
       description = "Enable the nginx";
     };
-    flashcards = lib.mkOption {
+    jellyfin = lib.mkOption {
       type = lib.types.bool;
       default = false;
-      description = "Enable the flashcards";
+      description = "Enable the jellyfin";
     };
   };
 }
