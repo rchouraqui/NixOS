@@ -126,9 +126,9 @@
             nixos-hardware.nixosModules.framework-16-7040-amd
           ];
         };
-        "srv-nuc" = mkHost {
+        "server" = mkHost {
           sys = "x86_64-linux";
-          nixName = "srv-nuc";
+          nixName = "server";
           hostModules = [ ];
         };
       };
