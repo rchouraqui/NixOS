@@ -1,11 +1,10 @@
 let
-  srv-nuc = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF8h0U5Dbp8NxS79xv4VSbDt8lS0GbA8R2Uvjy6CL1dk root@srv-nuc";
-  #add srv-fix = 
   framework = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGgR92yn3ANd1n1s+jbGRM/+Y1iV7GEYh2fDLLp+8PdL root@nixos-framework";
+  server = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEx39A/Xig4JtGkkFi/RoId3xwHhk5wPx4YVGwjmwOMr root@server";
 
   systems = [
-    srv-nuc
     framework
+    server
   ];
 
 in
