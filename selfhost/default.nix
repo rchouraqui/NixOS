@@ -31,6 +31,14 @@ let
       lib
       ;
   };
+  immich = import ./immich.nix {
+    inherit
+      inputs
+      config
+      pkgs
+      lib
+      ;
+  };
   cfg = config.selfhost;
 
 in
@@ -39,6 +47,7 @@ in
     htop
     nginx
     jellyfin
+    immich
   ];
 
   options.selfhost = {
@@ -56,6 +65,11 @@ in
       type = lib.types.bool;
       default = false;
       description = "Enable the jellyfin";
+    };
+    immich = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Enable the immich";
     };
   };
 }

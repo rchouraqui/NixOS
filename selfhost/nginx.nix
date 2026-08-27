@@ -8,7 +8,7 @@
 let
   domainServices = [
     "htop"
-    "flashcards"
+    "immich"
     "jellyfin"
     "radarr"
     "sonarr"
@@ -50,14 +50,16 @@ in
     security.acme = {
       acceptTerms = true;
       email = "no-reply@dprive.fr";
-      certs = builtins.listToAttrs (map (domain: {
-        name = "${domain}.dprive.fr";
-        value ={
-          dnsProvider = "cloudflare";
-          credentialFiles."CLOUDFLARE_DNS_API_TOKEN_FILE" = config.age.secrets."cloudflare-token".path;
-          webroot = null;
-        };
-      }) domainServices);
+      certs = builtins.listToAttrs (
+        map (domain: {
+          name = "${domain}.dprive.fr";
+          value = {
+            dnsProvider = "cloudflare";
+            credentialFiles."CLOUDFLARE_DNS_API_TOKEN_FILE" = config.age.secrets."cloudflare-token".path;
+            webroot = null;
+          };
+        }) domainServices
+      );
     };
 
     users.users.nginx.extraGroups = [ "acme" ];
@@ -100,4 +102,3 @@ in
     };
   };
 }
-
