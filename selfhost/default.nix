@@ -31,14 +31,6 @@ let
       lib
       ;
   };
-  flashcards = import ./flashcards.nix {
-    inherit
-      inputs
-      config
-      pkgs
-      lib
-      ;
-  };
   cfg = config.selfhost;
 
 in
@@ -47,7 +39,6 @@ in
     htop
     nginx
     jellyfin
-    flashcards
   ];
 
   options.selfhost = {
@@ -65,11 +56,6 @@ in
       type = lib.types.bool;
       default = false;
       description = "Enable the jellyfin";
-    };
-    flashcards = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Enable the flashcards";
     };
   };
 }
