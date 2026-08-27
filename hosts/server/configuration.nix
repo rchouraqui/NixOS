@@ -61,6 +61,7 @@
     htop = true;
     nginx = true;
     jellyfin = true;
+    immich = true;
   };
 
   system.stateVersion = "25.11";
