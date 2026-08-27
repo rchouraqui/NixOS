@@ -61,6 +61,7 @@
     htop = true;
     nginx = true;
     jellyfin = true;
+    flashcards = true;
   };
 
   system.stateVersion = "25.11";
