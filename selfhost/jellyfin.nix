@@ -6,14 +6,21 @@
 }:
 let
   cfg = config.selfhost.jellyfin;
-  data_dir = "/mnt/nas/jellyfin";
+  data_dir = "/mnt/ssd";
 in
 {
   config = lib.mkIf cfg {
+    fileSystems."/mnt/ssd" = {
+      device = "/dev/disk/by-uuid/9767df84-6aaf-4ed3-bb6e-2d5711b194b2";
+      fsType = "ext4";
+    };
     fileSystems."/mnt/nas/jellyfin" = {
       device = "10.0.10.3:/mnt/HDD/jellyfin-media";
       fsType = "nfs";
-      options = [ "nfsvers=4.2" "_netdev" ];
+      options = [
+        "nfsvers=4.2"
+        "_netdev"
+      ];
     };
     age.secrets."mullvad-wireguard-secret" = {
       file = ../secrets/mullvad-wireguard-secret.age;
@@ -145,7 +152,6 @@ in
         enable = true;
         enable32Bit = true;
         extraPackages = with pkgs; [
-          intel-vaapi-driver
           intel-media-driver
           libvdpau-va-gl
           libva
@@ -156,14 +162,11 @@ in
     };
     environment = {
       systemPackages = with pkgs; [
-        intel-vaapi-driver
         intel-media-driver
+        libvdpau-va-gl
         libva
         libva-utils
-        ffmpeg-full
-        jellyfin-ffmpeg
         vdpauinfo
-        nvtopPackages.full
       ];
     };
 
@@ -272,6 +275,7 @@ in
         "d ${data_dir}/jellyfin/config 0770 jellyfin datausers -"
         "d ${data_dir}/jellyfin/cache 0770 jellyfin datausers -"
         "d ${data_dir}/jellyfin/log 0770 jellyfin datausers -"
+        "d ${data_dir}/jellyfin/plugins 0770 jellyfin datausers -"
       ];
     };
   };
