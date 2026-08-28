@@ -271,11 +271,6 @@ in
         "d ${data_dir}/downloads 0770 jellyfin datausers -"
         "d ${data_dir}/downloads/radarr 0770 jellyfin datausers -"
         "d ${data_dir}/downloads/tv-sonarr 0770 jellyfin datausers -"
-        "d ${data_dir}/jellyfin 0770 jellyfin datausers -"
-        "d ${data_dir}/jellyfin/config 0770 jellyfin datausers -"
-        "d ${data_dir}/jellyfin/cache 0770 jellyfin datausers -"
-        "d ${data_dir}/jellyfin/log 0770 jellyfin datausers -"
-        "d ${data_dir}/jellyfin/plugins 0770 jellyfin datausers -"
       ];
     };
   };
