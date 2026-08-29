@@ -12,6 +12,7 @@ let
     "jellyfin"
     "radarr"
     "sonarr"
+    "nextcloud"
   ];
 
   cfg = config.selfhost.nginx;
