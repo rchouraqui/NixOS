@@ -62,6 +62,7 @@
     nginx = true;
     jellyfin = true;
     immich = true;
+    nextcloud = true;
   };
 
   system.stateVersion = "25.11";
