@@ -12,7 +12,7 @@ in
 {
   config = lib.mkIf cfg {
     fileSystems."/mnt/nas/immich" = {
-      device = "10.0.10.3:/mnt/HDD/immich-photos";
+      device = "10.0.10.3:/mnt/HDD/immich";
       fsType = "nfs";
       options = [
         "nfsvers=4.2"
