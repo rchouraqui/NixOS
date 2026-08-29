@@ -11,4 +11,6 @@ in
 {
   "cloudflare-token.age".publicKeys = systems;
   "mullvad-wireguard-secret.age".publicKeys = systems;
+  "nextcloud-admin-pass.age".publicKeys = systems;
+  "nextcloud-database.age".publicKeys = systems;
 }
