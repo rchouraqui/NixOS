@@ -39,6 +39,14 @@ let
       lib
       ;
   };
+  nextcloud = import ./nextcloud.nix {
+    inherit
+      inputs
+      config
+      pkgs
+      lib
+      ;
+  };
   cfg = config.selfhost;
 
 in
@@ -48,6 +56,7 @@ in
     nginx
     jellyfin
     immich
+    nextcloud
   ];
 
   options.selfhost = {
@@ -70,6 +79,11 @@ in
       type = lib.types.bool;
       default = false;
       description = "Enable the immich";
+    };
+    nextcloud = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Enable the nextcloud";
     };
   };
 }
