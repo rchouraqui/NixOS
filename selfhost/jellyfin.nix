@@ -14,14 +14,6 @@ in
       device = "/dev/disk/by-uuid/9767df84-6aaf-4ed3-bb6e-2d5711b194b2";
       fsType = "ext4";
     };
-    fileSystems."/mnt/nas/jellyfin" = {
-      device = "10.0.10.3:/mnt/HDD/jellyfin-media";
-      fsType = "nfs";
-      options = [
-        "nfsvers=4.2"
-        "_netdev"
-      ];
-    };
     age.secrets."mullvad-wireguard-secret" = {
       file = ../secrets/mullvad-wireguard-secret.age;
       owner = "root";
