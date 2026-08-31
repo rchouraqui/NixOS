@@ -14,9 +14,6 @@ let
   keyboard = import ./keyboard.nix {
     inherit config pkgs lib;
   };
-  network = import ./network.nix {
-    inherit config pkgs lib;
-  };
   bluetooth = import ./bluetooth.nix {
     inherit config pkgs lib;
   };
@@ -29,18 +26,12 @@ in
   imports = [
     nix-settings
     keyboard
-    network
     bluetooth
     printer
     inputs.agenix.nixosModules.default
   ];
 
   options.config-hw = {
-    network = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Enable the Network configuration";
-    };
     nix-settings = lib.mkOption {
       type = lib.types.bool;
       default = false;
@@ -92,22 +83,24 @@ in
       enableAllFirmware = true;
     };
 
-    environment.systemPackages = with pkgs; [
-      vim
-      tree
-      ripgrep
-      wget
-      wireguard-tools
-      git
-      home-manager
-      zsh
-      vulkan-tools
-      openssl
-      age
-    ]
-    ++ [
-      inputs.agenix.packages.${pkgs.system}.agenix
-    ];
-  age.identityPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+    environment.systemPackages =
+      with pkgs;
+      [
+        vim
+        tree
+        ripgrep
+        wget
+        wireguard-tools
+        git
+        home-manager
+        zsh
+        vulkan-tools
+        openssl
+        age
+      ]
+      ++ [
+        inputs.agenix.packages.${pkgs.system}.agenix
+      ];
+    age.identityPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
   };
 }
