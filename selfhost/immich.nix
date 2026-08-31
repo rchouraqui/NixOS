@@ -17,6 +17,7 @@ in
       options = [
         "nfsvers=4.2"
         "_netdev"
+        "x-systemd.automount"
       ];
     };
     networking.firewall.allowedTCPPorts = [
