@@ -69,7 +69,7 @@ in
             ];
             environment = {
               PUID = "1000";
-              PGID = "991";
+              PGID = "992";
               WEBUI_PORT = "8080";
               TZ = "Europe/Paris";
             };
@@ -89,7 +89,7 @@ in
             ];
             environment = {
               PUID = "1000";
-              PGID = "991";
+              PGID = "992";
               TZ = "Europe/Paris";
             };
             volumes = [
@@ -109,7 +109,7 @@ in
             ];
             environment = {
               PUID = "1000";
-              PGID = "991";
+              PGID = "992";
               TZ = "Europe/Paris";
             };
             volumes = [
@@ -129,7 +129,7 @@ in
             ];
             environment = {
               PUID = "1000";
-              PGID = "991";
+              PGID = "992";
               TZ = "Europe/Paris";
             };
             volumes = [
