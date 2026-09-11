@@ -47,6 +47,14 @@ let
       lib
       ;
   };
+  sso = import ./sso.nix {
+    inherit
+      inputs
+      config
+      pkgs
+      lib
+      ;
+  };
   cfg = config.selfhost;
 
 in
@@ -57,6 +65,7 @@ in
     jellyfin
     immich
     nextcloud
+    sso
   ];
 
   options.selfhost = {
@@ -84,6 +93,11 @@ in
       type = lib.types.bool;
       default = false;
       description = "Enable the nextcloud";
+    };
+    sso = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Enable the sso";
     };
   };
 }
