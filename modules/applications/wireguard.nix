@@ -6,10 +6,26 @@
 }:
 
 let
+  wireguard-privateKeyFile = config.age.secrets."wireguard-privateKeyFile".path;
+  wireguard-presharedKeyFile = config.age.secrets."wireguard-presharedKeyFile".path;
   cfg = config.applications.wireguard;
 in
 {
   config = lib.mkIf cfg {
+    age.secrets."wireguard-privateKeyFile" = {
+      file = ../../secrets/wireguard-privateKeyFile.age;
+      owner = "root";
+      group = "root";
+      mode = "0400";
+    };
+    age.secrets."wireguard-presharedKeyFile" = {
+      file = ../../secrets/wireguard-presharedKeyFile.age;
+      owner = "root";
+      group = "root";
+      mode = "0400";
+    };
+
+    networking.firewall.allowedUDPPorts = [ 51555 ];
 
     environment.systemPackages = [ pkgs.wireguard-tools ];
 
@@ -17,12 +33,12 @@ in
       wg0 = {
         autostart = false;
         address = [ "10.0.99.2/32" ];
-        privateKeyFile = "/etc/wireguard/private.key";
+        privateKeyFile = wireguard-privateKeyFile;
 
         peers = [
           {
-            publicKey = "ECWQubbsVUjq50L5C8jbUWzKrmf7PoPGTixxMeKyhgw=";
-            presharedKeyFile = "/etc/wireguard/preshared.key";
+            publicKey = "YHMyzjTOmLJnnxLHQMVP9bYxIKeRdb2SvaAJ6oFtt14=";
+            presharedKeyFile = wireguard-presharedKeyFile;
             allowedIPs = [
               "10.0.10.0/24"
               "10.0.20.0/24"
@@ -35,7 +51,5 @@ in
         ];
       };
     };
-
-    networking.firewall.allowedUDPPorts = [ 51555 ];
   };
 }
