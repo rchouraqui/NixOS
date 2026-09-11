@@ -15,4 +15,7 @@ in
   "nextcloud-database.age".publicKeys = systems;
   "wireguard-privateKeyFile.age".publicKeys = systems;
   "wireguard-presharedKeyFile.age".publicKeys = systems;
+  "kandim-admin.age".publicKeys = systems;
+  "kandim-idmAdmin.age".publicKeys = systems;
+  "nextcloud-oidc-secret.age".publicKeys = systems;
 }
