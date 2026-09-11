@@ -13,4 +13,6 @@ in
   "mullvad-wireguard-secret.age".publicKeys = systems;
   "nextcloud-admin-pass.age".publicKeys = systems;
   "nextcloud-database.age".publicKeys = systems;
+  "wireguard-privateKeyFile.age".publicKeys = systems;
+  "wireguard-presharedKeyFile.age".publicKeys = systems;
 }
