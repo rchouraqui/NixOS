@@ -13,6 +13,7 @@ let
     "radarr"
     "sonarr"
     "nextcloud"
+    "sso"
   ];
 
   cfg = config.selfhost.nginx;
