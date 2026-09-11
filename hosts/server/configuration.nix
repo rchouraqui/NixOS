@@ -73,6 +73,7 @@
     jellyfin = true;
     immich = true;
     nextcloud = true;
+    sso = true;
   };
 
   system.stateVersion = "25.11";
