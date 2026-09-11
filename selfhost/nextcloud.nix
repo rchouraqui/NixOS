@@ -40,6 +40,12 @@ in
       group = "nextcloud";
       mode = "0400";
     };
+    age.secrets."nextcloud-oidc-secret" = {
+      file = ../secrets/nextcloud-oidc-secret.age;
+      owner = "kanidm";
+      group = "kanidm";
+      mode = "0400";
+    };
 
     environment.systemPackages = with pkgs; [
       php
@@ -118,7 +124,41 @@ in
         };
         configureRedis = true;
       };
-
+      kanidm.provision.systems.oauth2 = {
+        nextcloud = {
+          present = true;
+          displayName = "Nextcloud";
+          originUrl = "https://nextcloud.dprive.fr/apps/user_oidc/code";
+          originLanding = "https://nextcloud.dprive.fr/login";
+          basicSecretFile = config.age.secrets.nextcloud-oidc-secret.path;
+          public = false;
+          enableLocalhostRedirects = false;
+          allowInsecureClientDisablePkce = false;
+          preferShortUsername = false;
+          claimMaps = {
+            groups = {
+              joinType = "array";
+              valuesByGroup = {
+                nextcloud_admins = [ "admin" ];
+              };
+            };
+          };
+          scopeMaps = {
+            nextcloud_admins = [
+              "openid"
+              "profile"
+              "email"
+              "groups"
+            ];
+            nextcloud_users = [
+              "openid"
+              "profile"
+              "email"
+              "groups"
+            ];
+          };
+        };
+      };
       nginx = {
         enable = true;
         virtualHosts."nextcloud.dprive.fr" = {
