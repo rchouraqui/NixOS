@@ -43,8 +43,8 @@ in
     age.secrets."nextcloud-oidc-secret" = {
       file = ../secrets/nextcloud-oidc-secret.age;
       owner = "kanidm";
-      group = "kanidm";
-      mode = "0400";
+      group = "nextcloud";
+      mode = "0440";
     };
 
     environment.systemPackages = with pkgs; [
@@ -191,6 +191,35 @@ in
             "postgresql.service"
             "mnt-nas-nextcloud.mount"
           ];
+        };
+        "nextcloud-oidc-provider" = {
+          description = "Configure Nextcloud OIDC provider (Kanidm)";
+          after = [
+            "nextcloud-setup.service"
+            "kanidm.service"
+          ];
+          wants = [
+            "nextcloud-setup.service"
+            "kanidm.service"
+          ];
+          wantedBy = [ "multi-user.target" ];
+          environment = {
+            NEXTCLOUD_CONFIG_DIR = data_dir + "/config";
+          };
+          script = ''
+            SECRET=$(cat ${config.age.secrets."nextcloud-oidc-secret".path})
+            ${config.services.phpfpm.pools.nextcloud.phpPackage}/bin/php \
+              ${config.services.nextcloud.finalPackage}/occ \
+              user_oidc:provider kanidm \
+              --clientid="nextcloud" \
+              --clientsecret="$SECRET" \
+              --discoveryuri="https://sso.dprive.fr/oauth2/openid/nextcloud/.well-known/openid-configuration"
+          '';
+          serviceConfig = {
+            Type = "oneshot";
+            User = "nextcloud";
+            LoadCredential = "dbpass:${config.age.secrets."nextcloud-database".path}";
+          };
         };
       };
     };
