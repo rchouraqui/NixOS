@@ -74,6 +74,7 @@ in
               ];
               groups = [
                 "nextcloud_admins"
+                "vault_admins"
               ];
             };
           };
@@ -82,6 +83,12 @@ in
               present = true;
             };
             nextcloud_users = {
+              present = true;
+            };
+            vault_admins = {
+              present = true;
+            };
+            vault_users = {
               present = true;
             };
           };
