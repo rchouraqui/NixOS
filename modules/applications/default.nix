@@ -21,6 +21,9 @@ let
   wireguard = import ./wireguard.nix {
     inherit config pkgs lib;
   };
+  flatpak = import ./flatpak.nix {
+    inherit config pkgs lib;
+  };
 in
 {
   imports = [
@@ -29,6 +32,7 @@ in
     virtualbox
     ssh
     wireguard
+    flatpak
   ];
 
   options.applications = {
@@ -56,6 +60,11 @@ in
       type = lib.types.bool;
       default = false;
       description = "enable the wireguard configuration";
+    };
+    flatpak = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "enable the flatpak configuration";
     };
   };
 }
