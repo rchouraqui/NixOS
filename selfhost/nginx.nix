@@ -14,6 +14,7 @@ let
     "sonarr"
     "nextcloud"
     "sso"
+    "vault"
   ];
 
   cfg = config.selfhost.nginx;
