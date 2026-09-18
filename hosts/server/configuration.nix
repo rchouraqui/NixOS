@@ -32,11 +32,15 @@
       interface = "enp2s0";
     };
     nameservers = [
+      "10.0.10.1"
       "1.1.1.1"
       "1.0.0.1"
       "8.8.8.8"
       "8.8.4.4"
     ];
+    hosts = {
+      "10.0.10.4" = [ "sso.dprive.fr" ];
+    };
   };
 
   config-hw = {
@@ -74,6 +78,7 @@
     immich = true;
     nextcloud = true;
     sso = true;
+    vault = true;
   };
 
   system.stateVersion = "25.11";
