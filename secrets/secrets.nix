@@ -18,4 +18,8 @@ in
   "kandim-admin.age".publicKeys = systems;
   "kandim-idmAdmin.age".publicKeys = systems;
   "nextcloud-oidc-secret.age".publicKeys = systems;
+  "grafana-oidc-secret.age".publicKeys = systems;
+  "grafana-secret-key.age".publicKeys = systems;
+  "vault-secret-env.age".publicKeys = systems;
+  "vault-oidc-secret.age".publicKeys = systems;
 }
