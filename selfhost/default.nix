@@ -55,6 +55,14 @@ let
       lib
       ;
   };
+  vault = import ./vault.nix {
+    inherit
+      inputs
+      config
+      pkgs
+      lib
+      ;
+  };
   cfg = config.selfhost;
 
 in
@@ -66,6 +74,7 @@ in
     immich
     nextcloud
     sso
+    vault
   ];
 
   options.selfhost = {
@@ -98,6 +107,11 @@ in
       type = lib.types.bool;
       default = false;
       description = "Enable the sso";
+    };
+    vault = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Enable the vaultwarden";
     };
   };
 }
