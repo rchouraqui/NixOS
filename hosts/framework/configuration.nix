@@ -30,7 +30,6 @@
 
   config-hw = {
     nix-settings = true;
-    network = false;
     keyboard = true;
     bluetooth = true;
     printer = true;
@@ -51,6 +50,7 @@
     wireguard = true;
     man = true;
     ssh = false;
+    flatpak = true;
   };
 
   games = {
