@@ -65,7 +65,7 @@ in
 
     systemd.tmpfiles.rules = [
       "d /mnt/nas/immich 2770 root datausers -"
-      "d /mnt/nas/immich0750 immich immich -"
+      "d /mnt/nas/immich 0750 immich immich -"
     ];
   };
 }
