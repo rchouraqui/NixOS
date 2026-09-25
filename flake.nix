@@ -12,6 +12,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     hm-config = {
       url = "github:dprive05/home-manager";
       inputs = {
@@ -68,6 +73,7 @@
       hyprland,
       catppuccin,
       nixvim,
+      disko,
       ...
     }@inputs:
 
@@ -103,6 +109,7 @@
         nixpkgs.lib.nixosSystem {
           modules = [
             ./hosts/${nixName}/configuration.nix
+            disko.nixosModules.disko
             agenix.nixosModules.default
             home-manager.nixosModules.home-manager
             (mkHomeManagerModule userModules (
