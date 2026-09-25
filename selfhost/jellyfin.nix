@@ -6,14 +6,10 @@
 }:
 let
   cfg = config.selfhost.jellyfin;
-  data_dir = "/mnt/ssd";
+  data_dir = "/mnt/disks";
 in
 {
   config = lib.mkIf cfg {
-    fileSystems."/mnt/ssd" = {
-      device = "/dev/disk/by-uuid/9767df84-6aaf-4ed3-bb6e-2d5711b194b2";
-      fsType = "ext4";
-    };
     age.secrets."mullvad-wireguard-secret" = {
       file = ../secrets/mullvad-wireguard-secret.age;
       owner = "root";
@@ -149,9 +145,12 @@ in
           libva
           libva-utils
           vdpauinfo
+          vpl-gpu-rt
+          intel-compute-runtime
         ];
       };
     };
+
     environment = {
       systemPackages = with pkgs; [
         intel-media-driver
@@ -160,7 +159,14 @@ in
         libva-utils
         vdpauinfo
       ];
+      sessionVariables = {
+        LIBVA_DRIVER_NAME = "iHD";
+      };
     };
+
+    hardware.enableRedistributableFirmware = true;
+
+    boot.kernelParams = [ "i915.enable_guc=3" ];
 
     users = {
       groups.datausers = { };
@@ -189,6 +195,7 @@ in
             forceSSL = true;
             locations."/" = {
               proxyPass = "http://127.0.0.1:8096";
+              proxyWebsockets = true;
             };
           };
           "radarr.dprive.fr" = {
