@@ -10,6 +10,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./disk.nix
     ../../modules/games/default.nix
     ../../modules/graphical/default.nix
     ../../modules/hardware/default.nix
@@ -21,7 +22,7 @@
   networking = {
     hostName = "server";
     firewall.enable = true;
-    interfaces.enp2s0.ipv4.addresses = [
+    interfaces.enp6s0.ipv4.addresses = [
       {
         address = "10.0.10.4";
         prefixLength = 24;
@@ -29,7 +30,7 @@
     ];
     defaultGateway = {
       address = "10.0.10.1";
-      interface = "enp2s0";
+      interface = "enp6s0";
     };
     nameservers = [
       "10.0.10.1"
@@ -41,6 +42,7 @@
     hosts = {
       "10.0.10.4" = [ "sso.dprive.fr" ];
     };
+    hostId = "945040c0";
   };
 
   config-hw = {
