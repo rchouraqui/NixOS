@@ -133,6 +133,11 @@
             nixos-hardware.nixosModules.framework-16-7040-amd
           ];
         };
+        "fix" = mkHost {
+          sys = "x86_64-linux";
+          nixName = "fix";
+          hostModules = [ ];
+        };
         "server" = mkHost {
           sys = "x86_64-linux";
           nixName = "server";
