@@ -20,6 +20,9 @@ let
   printer = import ./printer.nix {
     inherit config pkgs lib;
   };
+  nvidia = import ./nvidia.nix {
+    inherit config pkgs lib;
+  };
 
 in
 {
@@ -28,6 +31,7 @@ in
     keyboard
     bluetooth
     printer
+    nvidia
     inputs.agenix.nixosModules.default
   ];
 
@@ -51,6 +55,11 @@ in
       type = lib.types.bool;
       default = false;
       description = "Enable the printer configuration";
+    };
+    nvidia = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Enable the nvidia configuration";
     };
   };
 
