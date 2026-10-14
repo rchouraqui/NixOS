@@ -10,14 +10,21 @@ let
 in
 {
   config = lib.mkIf cfg {
-    hardware.nvidia = {
-      open = false;
-      modesetting.enable = true;
-      powerManagement = {
-        enable = false;
-        finegrained = false;
+    hardware = {
+      nvidia = {
+        open = true;
+        modesetting.enable = true;
+        powerManagement = {
+          enable = false;
+          finegrained = false;
+        };
+        nvidiaSettings = true;
+        package = config.boot.kernelPackages.nvidiaPackages.latest;
       };
-      nvidiaSettings = true;
+      graphics = {
+        enable = true;
+        enable32Bit = true;
+      };
     };
     services = {
       xserver.videoDrivers = [ "nvidia" ];
