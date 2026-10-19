@@ -227,6 +227,9 @@ in
           after = [
             "network-online.target"
           ];
+          serviceConfig.ExecStartPre = [
+            "+${pkgs.systemd}/bin/systemd-tmpfiles --create /etc/tmpfiles.d/graphics-driver.conf"
+          ];
           unitConfig = {
             RequiresMountsFor = [
               "${data_dir}/movies"
