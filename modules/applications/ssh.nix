@@ -9,7 +9,8 @@ let
   cfg = config.applications.ssh;
   sshKeyFramework = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF+94jQUGWbqrlRL/OBlurEbs5ttgu+3V0fadvM6WAIi raph@framework";
   sshKeyMac = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIWcpcUpzbzDQsz/NCdvjXRcSwE75Jw7Clia9m7aPdKV raph@MacBookPro.lan";
-  sshKeyMacOcto = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIErXNxFKP0hiG9Y2roysRYNFP9RCPhwhm45ed7MDrQmH raphael.chouraqui@AMAMW9Y2F0YFK";
+  sshKeyLinuxOcto = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAJAE8chUw9RgCQGYoUes5hEQMEzHydT1Xf+8l0bzjVE raphael-chouraqui@PF5YQH4T";
+  sshKeyFix = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAhFu3wBDlzs0GZ8aQcs1auH3oBNV0CPzy8kwXN6C32k raph@fix";
 in
 
 {
@@ -17,7 +18,8 @@ in
     users.users.raph.openssh.authorizedKeys.keys = [
       sshKeyMac
       sshKeyFramework
-      sshKeyMacOcto
+      sshKeyLinuxOcto
+      sshKeyFix
     ];
 
     services.openssh = {
