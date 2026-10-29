@@ -8,7 +8,7 @@
 let
   cfg = config.selfhost.nextcloud;
   data_dir = "/mnt/nas/nextcloud";
-  nextcloud-admin-pass = config.age.secrets."nextcloud-admin-pass".path;
+  #nextcloud-admin-pass = config.age.secrets."nextcloud-admin-pass".path;
   nextcloud-database = config.age.secrets."nextcloud-database".path;
 in
 {
@@ -92,8 +92,8 @@ in
         hostName = "nextcloud.dprive.fr";
         datadir = data_dir;
         config = {
-          adminpassFile = nextcloud-admin-pass;
-          adminuser = "raph";
+          # adminpassFile = nextcloud-admin-pass;
+          # adminuser = "raph";
           dbtype = "pgsql";
           dbname = "nextcloud";
           dbhost = "localhost";
