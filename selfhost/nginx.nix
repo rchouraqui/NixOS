@@ -15,6 +15,7 @@ let
     "nextcloud"
     "sso"
     "vault"
+    "seerr"
   ];
 
   cfg = config.selfhost.nginx;
