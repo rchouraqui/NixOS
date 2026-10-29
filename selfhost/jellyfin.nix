@@ -52,6 +52,7 @@ in
               "7878:7878"
               "8989:8989"
               "9696:9696"
+              "5055:5055"
             ];
           };
           qbittorrent = {
@@ -130,6 +131,31 @@ in
             };
             volumes = [
               "${data_dir}/prowlarr/config:/config"
+            ];
+          };
+          seerr = {
+            image = "ghcr.io/seerr-team/seerr:latest";
+            autoStart = true;
+            dependsOn = [
+              "gluetun"
+            ];
+            extraOptions = [
+              "--init"
+              "--security-opt=no-new-privileges"
+              "--cap-drop=ALL"
+              "--health-cmd=wget --no-verbose --tries=1 --spider http://localhost:5055/api/v1/settings/public || exit 1"
+              "--health-start-period=20s"
+              "--health-timeout=3s"
+              "--health-interval=15s"
+              "--health-retries=3"
+              "--network=container:gluetun"
+            ];
+            environment = {
+              LOG_LEVEL = "debug";
+              TZ = "Europe/Paris";
+            };
+            volumes = [
+              "${data_dir}/seerr/config:/app/config"
             ];
           };
         };
@@ -212,6 +238,13 @@ in
               proxyPass = "http://127.0.0.1:8989";
             };
           };
+          "seerr.dprive.fr" = {
+            useACMEHost = "seerr.dprive.fr";
+            forceSSL = true;
+            locations."/" = {
+              proxyPass = "http://127.0.0.1:5055";
+            };
+          };
         };
       };
     };
@@ -273,6 +306,8 @@ in
         "d ${data_dir}/downloads 0770 jellyfin datausers -"
         "d ${data_dir}/downloads/radarr 0770 jellyfin datausers -"
         "d ${data_dir}/downloads/tv-sonarr 0770 jellyfin datausers -"
+        "d ${data_dir}/seerr 0750 1000 1000 -"
+        "d ${data_dir}/seerr/config 0750 1000 1000 -"
       ];
     };
   };
