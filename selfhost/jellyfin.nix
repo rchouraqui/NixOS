@@ -225,9 +225,31 @@ in
     services = {
       jellyfin = {
         enable = true;
+        forceEncodingConfig = true;
         dataDir = "${data_dir}/jellyfin";
         cacheDir = "${data_dir}/jellyfin/cache";
         openFirewall = true;
+        hardwareAcceleration = {
+          enable = true;
+          type = "qsv";
+          device = "/dev/dri/by-path/pci-0000:03:00.0-render";
+        };
+        transcoding = {
+          hardwareDecodingCodecs = {
+            av1 = true;
+            vp9 = true;
+            vc1 = true;
+            vp8 = true;
+            hevc = true;
+            h264 = true;
+            mpeg2 = true;
+            hevc10bit = true;
+            hevcRExt12bit = true;
+            hevcRExt10bit = true;
+          };
+          enableHardwareEncoding = true;
+          enableIntelLowPowerEncoding = true;
+        };
       };
 
       nginx = {
