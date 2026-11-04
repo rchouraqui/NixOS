@@ -53,6 +53,7 @@ in
               "8989:8989"
               "9696:9696"
               "5055:5055"
+              "6767:6767"
             ];
           };
           qbittorrent = {
@@ -156,6 +157,22 @@ in
             };
             volumes = [
               "${data_dir}/seerr/config:/app/config"
+            ];
+          };
+          bazarr = {
+            image = "lscr.io/linuxserver/bazarr:latest";
+            autoStart = true;
+            dependsOn = [ "gluetun" ];
+            extraOptions = [ "--network=container:gluetun" ];
+            environment = {
+              PUID = "1000";
+              PGID = "992";
+              TZ = "Europe/Paris";
+            };
+            volumes = [
+              "${data_dir}/bazarr/config:/config"
+              "${data_dir}:/data"
+              "${data_dir}/downloads:/downloads"
             ];
           };
         };
@@ -308,6 +325,8 @@ in
         "d ${data_dir}/downloads/tv-sonarr 0770 jellyfin datausers -"
         "d ${data_dir}/seerr 0750 1000 1000 -"
         "d ${data_dir}/seerr/config 0750 1000 1000 -"
+        "d ${data_dir}/bazarr 0750 1000 992 -"
+        "d ${data_dir}/bazarr/config 0750 1000 992 -"
       ];
     };
   };
