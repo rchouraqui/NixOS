@@ -105,7 +105,7 @@ in
             calendar
             contacts
             tasks
-            deck
+            #deck Nextcloud app 'deck' declared maximum nextcloud version 34, but we are on 35.0.2.
             ;
           user_oidc = pkgs.fetchNextcloudApp {
             appName = "user_oidc";
