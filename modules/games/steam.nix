@@ -13,7 +13,9 @@ in
     programs = {
       steam = {
         enable = true;
+        package = pkgs.steam.override { extraArgs = "-pipewire"; };
         gamescopeSession.enable = true;
+        remotePlay.openFirewall = true;
         extraCompatPackages = with pkgs; [
           protonup-ng
           proton-ge-bin
