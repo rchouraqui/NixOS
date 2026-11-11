@@ -247,6 +247,10 @@ in
             hevcRExt12bit = true;
             hevcRExt10bit = true;
           };
+          hardwareEncodingCodecs = {
+            av1 = false;
+            hevc = true;
+          };
           enableHardwareEncoding = true;
           enableIntelLowPowerEncoding = true;
         };
